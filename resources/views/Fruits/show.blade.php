@@ -27,6 +27,10 @@
         @endif
 
         <h4 class="text-center pt-3 mt-5">See Fruit Information</h4>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4"><img class="img-thumbnail" src="{{ asset('storage/'. $fruit->fruits_img) }}" alt=""></div>
+            </div>
 
         <div class="row ">
             <div class="col-md-2">Fruit Name :</div>

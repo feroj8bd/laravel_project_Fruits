@@ -27,12 +27,13 @@
         @endif
 
         <h4 class="text-center pt-3 mt-5">Update Fruits</h4>
-        <form action="{{ route('fruits.update', $fruit->id) }}" method="POST">
+        
+        <form action="{{ route('fruits.update', $fruit->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- frutis name --}}
             <div class="row mt-3">
                 <div class="col-md-2">
-                    <label for="fruits_name">Fruits Name :</label>
+                    <label for="fruits_name">Fruit Name :</label>
                 </div>
                 <div class="col-md-4">
                     <input type="text" name="fruits_name" value="{{ old('fruits_name', $fruit->fruits_name) }}"
@@ -47,7 +48,7 @@
             {{-- fruits type --}}
             <div class="row mt-3">
                 <div class="col-md-2">
-                    <label for="fruits_type">Fruits Type :</label>
+                    <label for="fruits_type">Fruit Type :</label>
                 </div>
                 <div class="col-md-4">
                     <input type="text" name="fruits_type" value="{{ old('fruits_type', $fruit->fruits_type) }}"
@@ -63,7 +64,7 @@
             {{-- fruits price --}}
             <div class="row mt-3">
                 <div class="col-md-2">
-                    <label for="fruits_price">Fruits Price :</label>
+                    <label for="fruits_price">Price :</label>
                 </div>
                 <div class="col-md-4">
                     <input type="text" name="fruits_price" value="{{ old('fruits_price', $fruit->fruits_price) }}"
@@ -95,11 +96,14 @@
             {{-- fruits image --}}
             <div class="row mt-3">
                 <div class="col-md-2">
-                    <label for="fruits_img">Fruits Image :</label>
+                    <label for="fruits_img">Image :</label>
                 </div>
                 <div class="col-md-4">
                     <input type="file" name="fruits_img" value="{{ old('fruits_img', $fruit->fruits_img) }}"
-                        id="fruits_img" class="orm-control">
+                        id="fruits_img" class="form-control">
+                </div>
+                <div class="col-lg-4">
+                    <img class="w-25" src="{{ asset('storage/'.$fruit->fruits_img) }}" alt="{{ $fruit->name . '`s ima ' }}"> 
                 </div>
                 <div class="col-md-4">
                     @error('fruits_img')

@@ -28,12 +28,14 @@
         @endif
 
         <h4 class="text-center pt-3 mt-5">Add Fruits</h4>
-        <form action="{{ route('fruits.store') }}" method="POST">
+
+        <form action="{{ route('fruits.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+
             {{-- frutis name --}}
             <div class="row mt-3">
                 <div class="col-md-2">
-                    <label for="fruits_name">Fruits Name :</label>
+                    <label for="fruits_name">Name :</label>
                 </div>
                 <div class="col-md-4">
                     <input type="text" name="fruits_name" id="fruits_name" class="form-control">
@@ -47,7 +49,7 @@
             {{-- fruits type --}}
             <div class="row mt-3">
                 <div class="col-md-2">
-                    <label for="fruits_type">Fruits Type :</label>
+                    <label for="fruits_type">Fruit Type :</label>
                 </div>
                 <div class="col-md-4">
                     <input type="text" name="fruits_type" id="fruits_type" class="form-control">
@@ -62,7 +64,7 @@
             {{-- fruits price --}}
             <div class="row mt-3">
                 <div class="col-md-2">
-                    <label for="fruits_price">Fruits Price :</label>
+                    <label for="fruits_price">Price :</label>
                 </div>
                 <div class="col-md-4">
                     <input type="text" name="fruits_price" id="fruits_price" class="form-control">
@@ -89,20 +91,10 @@
                 </div>
             </div>
 
+
             {{-- fruits image --}}
-            <div class="row mt-3">
-                <div class="col-md-2">
-                    <label for="fruits_img">Fruits Image :</label>
-                </div>
-                <div class="col-md-4">
-                    <input type="file" name="fruits_img" id="fruits_img" class="orm-control">
-                </div>
-                <div class="col-md-4">
-                    @error('fruits_img')
-                        <small class="alert alert-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-            </div>
+            <input type="file" accept="image/*" id="uploadInput" >
+            <div id="imagePreview"></div>
 
             <div class="row mt-3">
                 <div class="col-md-2"></div>
@@ -116,12 +108,40 @@
     </div>
 
 
-
-
-
     {{-- biotstarp js cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <script>
+        // Function to display image preview
+        function displayImagePreview(file) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var imagePreview = document.getElementById('imagePreview');
+                imagePreview.innerHTML = ''; // Clear previous preview
+
+                var imgElement = document.createElement('img');
+                imgElement.src = e.target.result;
+                imgElement.style.maxWidth = '200px'; // Set maximum width for preview
+                imgElement.style.maxHeight = '200px'; // Set maximum width for preview
+
+                imagePreview.appendChild(imgElement);
+            };
+
+            reader.readAsDataURL(file); // Read the file as a data URL
+        }
+
+        // Event listener for file input change
+        var uploadInput = document.getElementById('uploadInput');
+        uploadInput.addEventListener('change', function() {
+            var file = this.files[0]; // Get the selected file
+
+            if (file) {
+                displayImagePreview(file); // Display image preview
+            }
+        });
     </script>
 </body>
 

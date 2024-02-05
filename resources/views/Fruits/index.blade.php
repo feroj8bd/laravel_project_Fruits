@@ -12,12 +12,14 @@
 
 <body>
     <div class="container">
+        <!-- menu bar start -->
         <div class="mt-3">
             <a href="{{ url('/') }}" class="btn btn-success">Home</a>
             <a href="{{ route('fruits.create') }}" class="btn btn-success">Add Fruits</a>
 
             <a href="{{ route('fruits.index') }}" class="btn btn-warning">See All Fruits</a>
         </div>
+        <!-- menu bar end -->
 
         @if (Session::has('success'))
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -32,11 +34,11 @@
             <thead>
                 <tr>
                     <th>Sl No</th>
-                    <th>Fruits Name</th>
-                    <th>Fruits Type</th>
-                    <th>Fruits Price</th>
+                    <th>Name</th>
+                    <th>Fruit Type</th>
+                    <th>Price</th>
                     <th>Expiry Date</th>
-                    <th>Fruits Image</th>
+                    <th>Image</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -49,14 +51,13 @@
                         <td>{{ $fruit->fruits_type }}</td>
                         <td>{{ $fruit->fruits_price }}</td>
                         <td>{{ $fruit->expiry_date }}</td>
-                        <td>
-                            {{ $fruit->fruits_img }}
-                        </td>
+                        <td><img class="img-thumbnail" src="{{ asset('storage/'.  $fruit->fruits_img) }}" width="100px" alt="` s iam"></td>
+                        
                         <td>
                             <a href="{{ route('fruits.show', $fruit->id) }}" class="btn btn-success">Show</a>
 
                             <a href="{{ route('fruits.edit', $fruit->id) }}" class="btn btn-warning">Edit</a>
-                            
+
                             <a href="{{ route('fruits.delete', $fruit->id) }}" class="btn btn-danger"
                                 onclick="return confirm('Are you sure you want to delete this item?')">delete</a>
                         </td>
